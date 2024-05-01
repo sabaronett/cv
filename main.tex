@@ -1,0 +1,77 @@
+
+\documentclass[letterpaper,11pt]{article}
+% Choose bibliography style for formatting list of publications
+\usepackage[doi=true,maxbibnames=99,sorting=none,style=nature,url=true]{biblatex}
+\bibliography{papers}
+\usepackage{aas_macros}
+
+% Count total number of entries in each refsection
+\AtDataInput{%
+  \csnumgdef{entrycount:\therefsection}{%
+    \csuse{entrycount:\therefsection}+1}}
+
+% Print the labelnumber as the total number of entries in the
+% current refsection, minus the actual labelnumber, plus one
+\DeclareFieldFormat{labelnumber}{\mkbibdesc{#1}}    
+\newrobustcmd*{\mkbibdesc}[1]{%
+  \number\numexpr\csuse{entrycount:\therefsection}+1-#1\relax}
+
+% Choose theme, e.g. black, RedViolet, ForestGreen, MidnightBlue
+\def\theme{UNLVScarlet}
+
+% More predefined colors can be found in 
+% https://en.wikibooks.org/wiki/LaTeX/Colors
+% Example photograph taken from Wikimedia Commons
+% https://commons.wikimedia.org/wiki/File:Kiara_Krit_passport.jpg
+
+\usepackage{simplecv}
+
+% \boldname{Baronett}{Stanley A.}{S.A.} % fails w/ middle names (original template)
+\forcsvlist{\listadd\boldnames}
+  {{Baronett, Stanley~A.}, {Baronett, S.~A.}, {Baronett, Stanley\bibnamedelima A.},
+   {Baronett, S\bibinitperiod\bibinitdelim A\bibinitperiod}}
+
+\begin{document}
+
+% Heading
+\headinginline{Stanley A. Baronett}{
+    % \email{stanley.a.baronett@gmail.com} \\
+    \email{barons2@unlv.nevada.edu} \\
+    % \website{simonsfoundation.org/people/stanley-a-baronett}
+    \website{unlv-spfg.github.io/team/baronett-stanley} \\
+    % \github{sabaronett} \\
+    \linkedin{stanley-a-baronett}    
+}Curriculum Vitae
+
+% \headingphoto{Stanley A. Baronett}{
+%     % Graduate Assistant \\
+%     % Department of Physics \& Astronomy \\
+%     % University of Nevada, Las Vegas \\
+%     % 4505 S. Maryland Pkwy \\
+%     % Las Vegas, NV 89154 \\
+%     % \phone{702-895-3011} \\ \\
+    % \email{barons2@unlv.nevada.edu} \\
+    % \website{unlv-spfg.github.io/team/baronett-stanley} \\
+    % \linkedin{stanley-a-baronett} \\
+%     % \phone{+1-502-849-5989} \\
+% }{unlv.jpg}Curriculum Vitae
+
+% Page One
+\import{sections/}{education.tex}
+\import{sections/}{experience.tex}
+\import{sections/}{publications.tex}
+
+% \pagebreak
+
+% Page Two
+% \sidebyside
+%     {\import{sections/}{skills.tex}}
+%     {\import{sections/}{languages.tex}}
+% \import{sections/}{projects.tex}
+\import{sections/}{awards.tex}
+% \import{sections/}{extracurricular.tex}
+\import{sections/}{presentations.tex}
+\import{sections/}{teaching.tex}
+\import{sections/}{outreach.tex}
+
+\end{document}
